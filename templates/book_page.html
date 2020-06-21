@@ -1,0 +1,146 @@
+{% extends "layout.html" %}
+
+{% block content %}
+{% if session.username %}
+<h5>Hello {{ session.username }}! Please review this book</h5>
+<div class="content-section">
+  <div class="row">
+    <div class="col-4">
+      <h6 class="item_title"> Title </h6>
+    </div>
+    <div class="col-8">
+      <h5 class="item_content">{{ book.title }}</h5>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-4">
+      <h6 class="item_title"> ISBN </h6>
+    </div>
+    <div class="col-8">
+      <h5 class="item_content">{{ book.isbn }}</h5>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-4">
+      <h6 class="item_title"> Author </h6>
+    </div>
+    <div class="col-8">
+      <h5 class="item_content">{{ book.author }}</h5>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-4">
+      <h6 class="item_title"> Year Published </h6>
+    </div>
+    <div class="col-8">
+      <h5 class="item_content">{{ book.year }}</h5>
+    </div>
+  </div>
+</div>
+<div class="content-section">
+  <div class="row review">
+    <div class="col-4">
+      <span class="item_title"> Reviews from Goodreads: </span>
+    </div>
+    <div class="col-8">
+      {% if data  %}
+      <p class="item_content">Average Rating: {{data.books[0].average_rating}}</p>
+      <p class="item_content">Number of Ratings: {{data.books[0].ratings_count}}</p>
+      {% else %}
+      <p class="item_content">This book has not been reviewed on Goodreads</p>
+      {% endif %}
+    </div>
+  </div>
+</div>
+
+<div class="content-section">
+  <div class="row review">
+    <div class="col-4">
+      <span class="item_title"> Local Reviews Details : </span>
+    </div>
+    <div class="col-8">
+      <p class="item_content">Average Rating: {{ result[0] }}</p>
+      <p class="item_content">Number of Ratings: {{ result[1] }} </p>
+    </div>
+  </div>
+</div>
+
+<div class="content-section">
+  <form action="" method="POST">
+
+    <div class="form-group">
+      <label for="exampleInputEmail1">Rate this book</label>
+      <div class="form-check">
+        <input class="form-check-input" type="radio" name="rate" id="exampleRadios1" value="1" checked> &nbsp; &nbsp;
+        <label class="form-check-label" for="exampleRadios1">
+          <h2>*</h2>
+        </label>
+      </div>
+      <div class="form-check">
+        <input class="form-check-input" type="radio" name="rate" id="exampleRadios2" value="2"> &nbsp; &nbsp;
+        <label class="form-check-label" for="exampleRadios2">
+          <h2>**</h2>
+        </label>
+      </div>
+      <div class="form-check">
+        <input class="form-check-input" type="radio" name="rate" id="exampleRadios3" value="3"> &nbsp; &nbsp;
+        <label class="form-check-label" for="exampleRadios3">
+          <h2>*** </h2>
+        </label>
+      </div>
+      <div class="form-check">
+        <input class="form-check-input" type="radio" name="rate" id="exampleRadios3" value="4"> &nbsp; &nbsp;
+        <label class="form-check-label" for="exampleRadios3">
+          <h2>**** </h2>
+        </label>
+      </div>
+      <div class="form-check">
+        <input class="form-check-input" type="radio" name="rate" id="exampleRadios3" value="5"> &nbsp; &nbsp;
+        <label class="form-check-label" for="exampleRadios3">
+          <h2>***** </h2>
+        </label>
+      </div>
+    </div>
+    <div class="form-group">
+      <label for="exampleInputEmail1">Give your opinion about this book</label>
+      <textarea class="form-control" name="comment" id="" cols="30" rows="5" placeholder="Enter your comment here"
+        required></textarea>
+    </div>
+
+    <button type="submit" class="btn btn-primary">Submit</button>
+  </form>
+</div>
+
+<div class="content-section">
+  <h4>Reviews by people</h4>
+  {% for r in reviews %}
+  <div class="row review">
+    <div class="col-4">
+      <span class="item_title"> Reviewer </span>
+    </div>
+    <div class="col-8">
+      <span class="item_content">{{ r.name }}</span>
+    </div>
+  </div>
+  <div class="row review">
+    <div class="col-4">
+      <span class="item_title"> Rating </span>
+    </div>
+    <div class="col-8">
+      <span class="item_content">{{ r.rate }}</span>
+    </div>
+  </div>
+  <div class="row review">
+    <div class="col-4">
+      <span class="item_title"> Comments </span>
+    </div>
+    <div class="col-8">
+      <span class="item_content">{{ r.comment }}</s>
+    </div>
+  </div>
+  <hr>
+  {% endfor %}
+</div>
+
+{% endif %}
+{% endblock %}

@@ -1,0 +1,37 @@
+{% extends "layout.html" %}
+
+{% block content%}
+
+    <form action="{{ url_for('search') }}" method="POST">
+      <div class="row mb-4">
+        <div class="col-10">
+          <input class="form-control" type="search" placeholder="Search" name="search" aria-label="Search">
+        </div>
+        <div class="col-2">
+          <button class="btn btn-outline-info my-2 my-sm-0" type="submit">Search</button>
+        </div>
+      </div>
+    </form>
+
+    <table class="table">
+      <thead class="thead-dark">
+        <tr>
+          <th scope="col">ISBN</th>
+          <th scope="col">TITLE</th>
+          <th scope="col">AUTHOR</th>
+          <th scope="col">YEAR</th>
+        </tr>
+      </thead>
+
+      {% for book in books %}
+      <tbody>
+        <tr>
+          <td> <a class="nav-item nav-link" href="{{ url_for('book_page', book_id=book.book_id) }}" >{{ book.isbn }}</a></td>
+          <td><a class="nav-item nav-link" href="{{ url_for('book_page', book_id=book.book_id) }}" >{{ book.title }}</a></td>
+          <td><a class="nav-item nav-link" href="{{ url_for('book_page', book_id=book.book_id) }}" >{{ book.author }}</a></td>
+          <td>{{ book.year }}</td>
+        </tr>
+      </tbody>
+      {% endfor %}
+  </table>
+{% endblock %}

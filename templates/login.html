@@ -1,0 +1,30 @@
+{% extends "layout.html" %}
+
+{% block content %}
+<div class="content-section">
+    <h2>Login</h2>
+  <form action="" method="POST">
+    <div class="form-group">
+      <label for="">Email address</label>
+      <input type="email" class="form-control" name="email" aria-describedby="emailHelp" required>
+    </div>
+    <div class="form-group">
+      <label for="">Password</label>
+      <input type="password" class="form-control" name="password" required>
+    </div>
+    <div class="form-group form-check">
+      <input type="checkbox" class="form-check-input" name="remember">
+      <label class="form-check-label" for="exampleCheck1">Remember Me</label>
+    </div>
+    <button type="submit" class="btn btn-primary"> Submit </button>
+    <small class="text-muted ml-2">
+      <a href="#">Forgot Password?</a>
+    </small>
+  </form>
+</div>
+<div class="border-top p-3">
+  <small class="text-muted">
+    Need An Account? <a class="ml-2" href="{{ url_for('register') }}">Sign Up Now</a>
+  </small>
+</div>
+{% endblock content %}

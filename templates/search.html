@@ -1,0 +1,28 @@
+{% extends "layout.html" %}
+
+{% block content %}
+  <h3>Search Results</h3>
+
+  <table class="table">
+      <thead class="thead-dark">
+        <tr>
+          <th scope="col">ISBN</th>
+          <th scope="col">TITLE</th>
+          <th scope="col">AUTHOR</th>
+          <th scope="col">YEAR</th>
+        </tr>
+      </thead>
+
+      {% for book in get_result %}
+      <tbody>
+        <tr>
+          <td> <a class="nav-item nav-link" href="{{ url_for('book_page', book_id=book.book_id) }}" >{{ book.isbn }}</a></td>
+          <td><a class="nav-item nav-link" href="{{ url_for('book_page', book_id=book.book_id) }}" >{{ book.title }}</a></td>
+          <td><a class="nav-item nav-link" href="{{ url_for('book_page', book_id=book.book_id) }}" >{{ book.author }}</a></td>
+          <td>{{ book.year }}</td>
+        </tr>
+      </tbody>
+      {% endfor %}
+  </table>
+{% endblock %}
+
